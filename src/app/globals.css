@@ -1,0 +1,652 @@
+@import "tailwindcss";
+
+/*
+ * Crown Performance Wear design tokens.
+ * Palette: deep navy ink, warm paper and a signal lime accent.
+ */
+:root {
+  --ink: #07121c;
+  --ink-2: #0b1926;
+  --ink-3: #102231;
+  --night: #02070c;
+  --navy: #06131c;
+  --navy-2: #0a1b25;
+  --card: #0c202b;
+  --paper: #f2f0ea;
+  --paper-soft: #f7f5ef;
+  --white: #f4f7f8;
+  --signal: #b9ff21;
+  --muted: #a9b4bd;
+  --muted-2: #d8dee3;
+  --paper-ink: #07131b;
+  --paper-muted: #52615b;
+  --paper-eyebrow: #4e6460;
+  --line: rgba(255, 255, 255, 0.16);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --line-dark: rgba(7, 19, 27, 0.2);
+  --footer: #02090e;
+  --radius-xl: 32px;
+  --shell: min(1320px, calc(100vw - 56px));
+}
+
+@media (max-width: 640px) {
+  :root {
+    --shell: calc(100vw - 40px);
+    --radius-xl: 22px;
+  }
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-night: var(--night);
+  --color-navy: var(--navy);
+  --color-navy-2: var(--navy-2);
+  --color-card: var(--card);
+  --color-paper: var(--paper);
+  --color-paper-soft: var(--paper-soft);
+  --color-white-soft: var(--white);
+  --color-signal: var(--signal);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-paper-ink: var(--paper-ink);
+  --color-paper-muted: var(--paper-muted);
+  --color-paper-eyebrow: var(--paper-eyebrow);
+  --color-footer: var(--footer);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-line-dark: var(--line-dark);
+  --font-sans: var(--font-inter), Inter, Arial, sans-serif;
+  --font-display: var(--font-archivo-black), "Archivo Black", Impact, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--font-inter), Inter, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+@layer components {
+  .shell {
+    width: var(--shell);
+    margin-inline: auto;
+  }
+
+  /* Small uppercase label above headings. */
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.65;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+
+  /* Archivo Black display headings: tight tracking and leading. */
+  .display {
+    font-family: var(--font-archivo-black), "Archivo Black", Impact, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    line-height: 0.93;
+  }
+
+  .display-xl {
+    font-size: clamp(39px, 5.6vw, 81px);
+  }
+
+  .display-lg {
+    font-size: clamp(44px, 5vw, 72px);
+    line-height: 0.92;
+  }
+
+  .display-md {
+    font-size: clamp(34px, 3.6vw, 52px);
+    line-height: 0.96;
+  }
+
+  .heading-tight {
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    line-height: 0.96;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    min-height: 52px;
+    padding: 0 24px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .btn svg,
+  .text-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .btn:hover svg,
+  .text-link:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .btn-signal {
+    background: var(--signal);
+    color: #08110f;
+  }
+
+  .btn-signal:hover {
+    background: #d4ff6e;
+  }
+
+  .btn-ghost {
+    border: 0.8px solid rgba(255, 255, 255, 0.52);
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+  }
+
+  .btn-ghost:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-ink {
+    background: var(--paper-ink);
+    color: #fff;
+  }
+
+  .btn-ink:hover {
+    background: #13283a;
+  }
+
+  .btn-outline-ink {
+    border: 0.8px solid var(--line-dark);
+    color: var(--paper-ink);
+  }
+
+  .btn-outline-ink:hover {
+    border-color: var(--paper-ink);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .field {
+    width: 100%;
+    border: 0.8px solid #bdc7c4;
+    border-radius: 7px;
+    background: #fff;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: var(--paper-ink);
+    outline: none;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .field:focus {
+    border-color: var(--paper-ink);
+    box-shadow: 0 0 0 3px rgba(185, 255, 33, 0.45);
+  }
+
+  .field-dark {
+    width: 100%;
+    border: 0.8px solid var(--line-strong);
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 12px 14px;
+    font-size: 14px;
+    color: #fff;
+    outline: none;
+  }
+
+  .field-dark::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .field-dark:focus {
+    border-color: var(--signal);
+  }
+
+  .field-dark option {
+    color: var(--paper-ink);
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Markdown body copy for posts, services and custom pages. */
+  .prose-crown {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--paper-muted);
+  }
+
+  .prose-crown h2 {
+    margin: 2.2em 0 0.6em;
+    font-size: clamp(26px, 2.6vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--paper-ink);
+  }
+
+  .prose-crown h3 {
+    margin: 1.8em 0 0.5em;
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--paper-ink);
+  }
+
+  .prose-crown > :first-child {
+    margin-top: 0;
+  }
+
+  .prose-crown p,
+  .prose-crown ul,
+  .prose-crown ol {
+    margin: 0 0 1.1em;
+  }
+
+  .prose-crown ul {
+    list-style: disc;
+    padding-left: 1.3em;
+  }
+
+  .prose-crown ol {
+    list-style: decimal;
+    padding-left: 1.3em;
+  }
+
+  .prose-crown li {
+    margin: 0.3em 0;
+  }
+
+  .prose-crown a {
+    color: var(--paper-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--signal);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+  }
+
+  .prose-crown strong {
+    color: var(--paper-ink);
+  }
+
+  .prose-crown table {
+    width: 100%;
+    margin: 1.5em 0;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+
+  .prose-crown th,
+  .prose-crown td {
+    border-bottom: 1px solid var(--line-dark);
+    padding: 12px 10px;
+    text-align: left;
+  }
+
+  .prose-crown th {
+    color: var(--paper-ink);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .prose-crown blockquote {
+    margin: 1.5em 0;
+    border-left: 3px solid var(--signal);
+    padding-left: 1em;
+    color: var(--paper-ink);
+  }
+
+  /* Same markdown styles on a dark background. */
+  .prose-dark {
+    color: var(--muted);
+  }
+
+  .prose-dark h2,
+  .prose-dark h3,
+  .prose-dark strong,
+  .prose-dark a,
+  .prose-dark th,
+  .prose-dark blockquote {
+    color: #fff;
+  }
+
+  .prose-dark th,
+  .prose-dark td {
+    border-color: var(--line);
+  }
+}
+
+/*
+ * Motion system.
+ * Elements opt in with data-reveal="up|fade|clip|lines|stagger|grow"; MotionObserver adds .is-visible when they
+ * enter the viewport. Hidden states only apply once JavaScript has added .motion-ready to <html>, so content is
+ * never invisible without JS, and everything is skipped for prefers-reduced-motion.
+ */
+:root {
+  --ease-out: cubic-bezier(0.22, 0.72, 0.18, 1);
+  --ease-io: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.line {
+  display: block;
+}
+
+.line > span {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Fade and rise */
+  .motion-ready [data-reveal="up"] {
+    opacity: 0;
+    transform: translateY(34px);
+    transition:
+      opacity 0.72s var(--ease-out) var(--d, 0ms),
+      transform 0.82s var(--ease-out) var(--d, 0ms);
+  }
+
+  .motion-ready [data-reveal="fade"] {
+    opacity: 0;
+    transition: opacity 0.9s ease var(--d, 0ms);
+  }
+
+  .motion-ready [data-reveal="up"].is-visible,
+  .motion-ready [data-reveal="fade"].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Photo wipes down from the top while the image settles from a slight zoom */
+  .motion-ready [data-reveal="clip"] {
+    clip-path: inset(0 0 100% 0 round var(--clip-r, 22px));
+    transition: clip-path 0.95s var(--ease-io) var(--d, 0ms);
+  }
+
+  .motion-ready [data-reveal="clip"] img {
+    transform: scale(1.1);
+    transition: transform 1.25s var(--ease-io) var(--d, 0ms);
+  }
+
+  .motion-ready [data-reveal="clip"].is-visible {
+    clip-path: inset(0 0 0 0 round var(--clip-r, 22px));
+  }
+
+  .motion-ready [data-reveal="clip"].is-visible img {
+    transform: scale(1);
+  }
+
+  /* Headline lines slide up from behind a mask, one after another */
+  .motion-ready [data-reveal="lines"] .line {
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  .motion-ready [data-reveal="lines"] .line > span {
+    transform: translateY(112%);
+    transition: transform 0.9s var(--ease-out) calc(var(--d, 0ms) + var(--li, 0) * 95ms);
+  }
+
+  .motion-ready [data-reveal="lines"].is-visible .line > span {
+    transform: none;
+  }
+
+  /* Children appear one after another */
+  .motion-ready [data-reveal="stagger"] > * {
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      opacity 0.6s var(--ease-out),
+      transform 0.75s var(--ease-out);
+  }
+
+  .motion-ready [data-reveal="stagger"].is-visible > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .motion-ready [data-reveal="stagger"] > :nth-child(2) {
+    transition-delay: 80ms;
+  }
+  .motion-ready [data-reveal="stagger"] > :nth-child(3) {
+    transition-delay: 160ms;
+  }
+  .motion-ready [data-reveal="stagger"] > :nth-child(4) {
+    transition-delay: 240ms;
+  }
+  .motion-ready [data-reveal="stagger"] > :nth-child(5) {
+    transition-delay: 320ms;
+  }
+  .motion-ready [data-reveal="stagger"] > :nth-child(6) {
+    transition-delay: 400ms;
+  }
+  .motion-ready [data-reveal="stagger"] > :nth-child(7) {
+    transition-delay: 480ms;
+  }
+  .motion-ready [data-reveal="stagger"] > :nth-child(n + 8) {
+    transition-delay: 560ms;
+  }
+
+  /* Divider lines that draw themselves */
+  .motion-ready [data-reveal="grow"] {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.1s var(--ease-io) var(--d, 0ms);
+  }
+
+  .motion-ready [data-reveal="grow"].is-visible {
+    transform: none;
+  }
+
+  /* Hero: photo settles from a slow zoom, copy rises in sequence on load */
+  .hero-zoom {
+    animation: hero-zoom 2.2s var(--ease-out) both;
+  }
+
+  .hero-copy > * {
+    animation: rise-in 0.95s var(--ease-out) both;
+  }
+
+  .hero-copy > :nth-child(1) {
+    animation-delay: 0.15s;
+  }
+  .hero-copy > :nth-child(2) {
+    animation-delay: 0.28s;
+  }
+  .hero-copy > :nth-child(3) {
+    animation-delay: 0.42s;
+  }
+  .hero-copy > :nth-child(4) {
+    animation-delay: 0.56s;
+  }
+  .hero-copy > :nth-child(n + 5) {
+    animation-delay: 0.7s;
+  }
+
+  .hero-copy .line > span {
+    animation: line-up 1s var(--ease-out) both;
+    animation-delay: calc(0.3s + var(--li, 0) * 0.11s);
+  }
+
+  .hero-copy .line {
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  /* Proof band items slide in one by one */
+  .proof-in > * {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: rise-in 0.62s var(--ease-out) forwards;
+  }
+  .proof-in > :nth-child(1) {
+    animation-delay: 0.75s;
+  }
+  .proof-in > :nth-child(2) {
+    animation-delay: 0.85s;
+  }
+  .proof-in > :nth-child(3) {
+    animation-delay: 0.95s;
+  }
+  .proof-in > :nth-child(4) {
+    animation-delay: 1.05s;
+  }
+
+  /* Collection preview swap */
+  .swap-in {
+    animation: swap-in 0.62s var(--ease-out) both;
+  }
+
+  /* Parallax layers are moved by MotionObserver through --parallax */
+  [data-parallax] {
+    transform: translate3d(0, var(--parallax, 0px), 0);
+    will-change: transform;
+  }
+}
+
+/* Pinned horizontal scroller (desktop): MotionObserver sets the section height and --hx */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .motion-ready [data-hscroll] > .hs-stage {
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 100svh;
+  }
+
+  .motion-ready [data-hscroll-track] {
+    overflow: visible;
+    scroll-snap-type: none;
+    transform: translate3d(var(--hx, 0px), 0, 0);
+    will-change: transform;
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.14);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes line-up {
+  from {
+    transform: translateY(112%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes swap-in {
+  from {
+    opacity: 0.55;
+    clip-path: inset(4% 0);
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: scale(1);
+  }
+}
+
+/* Image hover zoom inside rounded media cards */
+.media-zoom img {
+  transition: transform 0.9s var(--ease-out);
+}
+
+.media-zoom:hover img {
+  transform: scale(1.045);
+}
+
+/* Lift on hover for cards */
+.lift {
+  transition:
+    transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out);
+}
+
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.45);
+}
+
+/* Underline that draws in on hover */
+.draw-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition: background-size 0.45s var(--ease-out);
+}
+
+.draw-underline:hover {
+  background-size: 100% 1px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}

@@ -1,0 +1,139 @@
+/* Admin dashboard extras. Scoped under .admin-root so the public site is unaffected. */
+
+.admin-root {
+  --admin-bg: #f5f4ef;
+  --admin-surface: #ffffff;
+  --admin-border: rgba(7, 19, 27, 0.09);
+  --admin-border-strong: rgba(7, 19, 27, 0.16);
+  --admin-sidebar: #07121c;
+  --admin-sidebar-2: #0b1926;
+  background: var(--admin-bg);
+}
+
+.admin-root ::selection {
+  background: var(--signal);
+  color: var(--ink);
+}
+
+/* Thin, quiet scrollbars inside the sidebar and modals. */
+.admin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+
+.admin-scroll-light {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(7, 19, 27, 0.18) transparent;
+}
+
+/* Keyboard focus that is visible on both dark and light surfaces. */
+.admin-root :is(a, button, select, input, textarea, summary):focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+.admin-root .admin-dark :is(a, button):focus-visible {
+  outline-color: var(--signal);
+}
+
+/* Skeleton shimmer. */
+.admin-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(7, 19, 27, 0.06);
+}
+
+.admin-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: admin-shimmer 1.4s infinite;
+}
+
+@keyframes admin-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes admin-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes admin-slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes admin-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes admin-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.admin-fade-up {
+  animation: admin-fade-up 0.35s cubic-bezier(0.22, 0.72, 0.18, 1) both;
+}
+
+.admin-drawer {
+  animation: admin-slide-in 0.28s cubic-bezier(0.22, 0.72, 0.18, 1) both;
+}
+
+.admin-overlay {
+  animation: admin-fade-in 0.2s ease both;
+}
+
+.admin-pop {
+  animation: admin-pop 0.24s cubic-bezier(0.22, 0.72, 0.18, 1) both;
+}
+
+/* Checkerboard behind image previews so transparent PNGs read clearly. */
+.admin-checker {
+  background-color: #f1f3f4;
+  background-image:
+    linear-gradient(45deg, #e4e7e9 25%, transparent 25%), linear-gradient(-45deg, #e4e7e9 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e4e7e9 75%), linear-gradient(-45deg, transparent 75%, #e4e7e9 75%);
+  background-size: 14px 14px;
+  background-position:
+    0 0,
+    0 7px,
+    7px -7px,
+    -7px 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-fade-up,
+  .admin-drawer,
+  .admin-overlay,
+  .admin-pop,
+  .admin-skeleton::after {
+    animation: none;
+  }
+}
